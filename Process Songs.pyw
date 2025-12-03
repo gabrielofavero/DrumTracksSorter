@@ -131,6 +131,20 @@ def remove_file(file_path, file_name, file_type):
     os.remove(file_path)
     print(f'Removed: "{file_name}" from "{file_type}"')
 
+def extract_base_name(filename: str) -> str:
+    name = filename.lower().replace(".mp3", "").strip()
+
+    # Remove leading prefix numbers (e.g. "001 Song", "12 Song", etc)
+    parts = name.split(" ", 1)
+    if parts[0].isdigit() and len(parts) > 1:
+        name = parts[1]
+
+    # Remove trailing "drums"
+    if name.endswith(" drums"):
+        name = name[:-6]  # remove " drums"
+
+    return name.strip().lower()
+
 ####################
 ## Main Functions ##
 ####################
@@ -209,19 +223,25 @@ def process_metronome_dir():
         return
 
     override = False
+
     for metronome_file in os.listdir(metronome_dir):
         if metronome_file.endswith(".mp3"):
             print(f"\nProcessing {metronome_file}")
+
+            # Detect type
             type = "Drumless Tracks"
-            if "drums" in metronome_file:
+            if "drums" in metronome_file.lower():
                 type = "Isolated Drums"
 
-            # Try to find a corresponding song by name
-            base_name = metronome_file.split(" ", 1)[-1] if " " in metronome_file else metronome_file
+            # Extract clean base name from metronome file
+            base_name = extract_base_name(metronome_file)
+
+            # Try to find a matching song
             match = None
             for dir in [original_songs_dir, drumless_tracks_dir, isolated_drums_dir]:
                 for file in os.listdir(dir):
-                    if file.lower().replace(".mp3", "") == base_name.lower().replace(".mp3", ""):
+                    # extract comparable names from files in dir
+                    if extract_base_name(file) == base_name:
                         match = os.path.join(dir, file)
                         break
                 if match:
@@ -231,13 +251,23 @@ def process_metronome_dir():
                 print(f"No matching song found for {metronome_file}. Skipping.")
                 continue
 
+            # Read metadata from matched song
             song_name, song_artist, song_genre, song_cover = get_mp3_metadata(match)
             track_path = os.path.join(metronome_dir, metronome_file)
 
+            # Update metadata in metronome version
             update_mp3_metadata(track_path, song_name, song_artist, song_genre, song_cover, type)
             print(f'Metadata updated for "{metronome_file}"')
 
-            override = rename_and_move_file(metronome_file, os.path.basename(match), type, metronome_dir, override)
+            # Rename + move final file
+            override = rename_and_move_file(
+                metronome_file,
+                os.path.basename(match),
+                type,
+                metronome_dir,
+                override
+            )
+
     print()
 
 def process_songs():
