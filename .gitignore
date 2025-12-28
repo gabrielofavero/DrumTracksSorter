@@ -1,8 +1,5 @@
-/.venv/
-/@Albums/
-/Drumless Tracks/
-/Isolated Drums/
-/Temp - BPMs/
-/Temp - Metronome/
-/Temp - Original Songs/
-/Temp - To Sort/
+*
+!.gitignore
+!drum-tracker-sorter.py
+!pyproject.toml
+!README.md
