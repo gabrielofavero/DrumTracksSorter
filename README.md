@@ -18,21 +18,21 @@ Supported workflows:
 ## Folder Structure
 
 Place this script in a folder containing the directories below:
-├── drum-tracker-sorter.py
-├── Temp - Original Songs
-├── Temp - To Sort
-├── Temp - Metronome
-├── Temp - BPMs
-├── Drumless Tracks
-└── Isolated Drums
+- `drum-tracker-sorter.py`
+- `Original Songs`
+- `To Sort`
+- `Metronome`
+- `BPMs`
+- `Drumless Tracks`
+- `Isolated Drums`
 
 
 The script reads from:
 
-- `Temp - Original Songs`
-- `Temp - To Sort`
-- `Temp - Metronome`
-- `Temp - BPMs`
+- `Original Songs`
+- `To Sort`
+- `Metronome`
+- `BPMs`
 
 and writes sorted files into:
 

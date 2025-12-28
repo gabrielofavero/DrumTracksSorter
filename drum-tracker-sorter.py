@@ -6,10 +6,10 @@ from mutagen.mp3 import MP3
 
 # Paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
-original_songs_dir = os.path.join(current_dir, 'Temp - Original Songs')
-to_sort_dir = os.path.join(current_dir, 'Temp - To Sort')
-metronome_dir = os.path.join(current_dir, 'Temp - Metronome')
-bpm_dir = os.path.join(current_dir, 'Temp - BPMs')
+original_songs_dir = os.path.join(current_dir, 'Original Songs')
+to_sort_dir = os.path.join(current_dir, 'To Sort')
+metronome_dir = os.path.join(current_dir, 'Metronome')
+bpm_dir = os.path.join(current_dir, 'BPMs')
 
 drumless_tracks_dir = os.path.join(current_dir, 'Drumless Tracks')
 isolated_drums_dir = os.path.join(current_dir, 'Isolated Drums')
@@ -165,7 +165,7 @@ def clean_sfk_files(dir):
         print("No .sfk files found\n")
 
 def process_to_sort_dir():
-    print("Processing 'Temp - To Sort' directory...")
+    print("Processing 'To Sort' directory...")
     
     if not os.listdir(original_songs_dir) or not os.listdir(to_sort_dir):
         print("One of the Temp directories is empty. Skipping.\n")
@@ -216,7 +216,7 @@ def process_to_sort_dir():
             print()
 
 def process_metronome_dir():
-    print("Processing 'Temp - Metronome' directory...")
+    print("Processing 'Metronome' directory...")
     
     if not os.path.exists(metronome_dir) or not os.path.exists(original_songs_dir):
         print("One of the required directories was not found.\n")
