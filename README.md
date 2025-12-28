@@ -13,11 +13,10 @@ Supported workflows:
 - Handle metronome versions
 - Clean `.sfk` garbage files
 
----
-
 ## Folder Structure
 
 Place this script in a folder containing the directories below:
+
 - `drum-tracker-sorter.py`
 - `Original Songs`
 - `To Sort`
@@ -25,7 +24,6 @@ Place this script in a folder containing the directories below:
 - `BPMs`
 - `Drumless Tracks`
 - `Isolated Drums`
-
 
 The script reads from:
 
@@ -39,8 +37,6 @@ and writes sorted files into:
 - `Drumless Tracks`
 - `Isolated Drums`
 
----
-
 ## How Matching Works
 
 A track is matched by normalized base name:
@@ -51,5 +47,3 @@ A track is matched by normalized base name:
 - Removes trailing `"drums"`
 
 Examples that will match as the same song:
-
-
